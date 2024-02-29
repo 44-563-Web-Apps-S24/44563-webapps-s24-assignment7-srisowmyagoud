@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html> <head> <style>
+    .flex-container {
+      display: flex;  flex-direction:row;
+      background-color: violet;
+  }
+
+.flex-container > div { 
+  background-color: #f1f1f1; 
+  margin: 10px;  padding: 20px;  font-size: 30px;
+}
+
+@media (max-width: 600px) { 
+	 .flex-container{
+		 flex-direction:column;
+		 background-color: olivedrab;
+	  }
+	}
+</style></head>
+
+
+
+<body>
+    <h2>Sri Sowmya Polampalli builds list with divs</h2>
+		<div class="flex-container" id="target">
+		  <div>row item 1</div>   
+		  <div>row item 2</div>  
+		  <div>row item 3</div>  
+		</div>
+        <br>
+        <input type="text" id="textInput">
+	<p> Press the button to create an new element of type div and then add it to the container.
+		</p>
+		<button onclick="makeNewDiv()">Add end</button>
+    <button onclick="addFront()">Add front</button>
+    <button onclick="removeItem()">Remove</button>
+    <button onclick="swap()">swap</button>
+    
+
+        <script>
+            function makeNewDiv(){     
+		
+		let element = document.createElement("div")
+		let val = document.getElementsByClassName("divlist").value;
+		var ele= document.getElementById("textInput").value;
+		console.log(ele);
+		
+		element.innerHTML = ele;
+
+		
+		let container = document.getElementById('target')
+		container.appendChild(element)
+		
+	}
+    
+            function addFront() {
+                var inputValue = document.getElementById('textInput').value;
+                var newDiv = document.createElement('div');
+                newDiv.innerHTML = inputValue;
+                newDiv.className = "divlist";
+                var container = document.querySelector('.flex-container');
+                container.insertBefore(newDiv, container.firstChild);
+            }
+    
+            function removeItem() {
+                var divListItems = document.getElementsByClassName("divlist");
+                var length = divListItems.length;
+                if (length > 0) {
+                    var middleIndex = Math.floor(length / 2);
+                    divListItems[middleIndex].remove();
+                }
+            }
+            function swap() {
+		            var container = document.getElementById('target');
+		            var len = container.children.length;
+
+		            if (len > 1) {
+			          var index1 = Math.floor(Math.random() * len);
+			          var index2;
+
+			          do {
+				        index2 = Math.floor(Math.random() * len);
+			          } while (index1 === index2);
+
+			          var element1 = container.children[index1];
+			          var element2 = container.children[index2];
+
+			          container.insertBefore(element2, container.children[index1]);
+			          container.insertBefore(element1, container.children[index2]);
+		}
+
+    }
+	
+        </script>	
+</body>
+
+</html>
